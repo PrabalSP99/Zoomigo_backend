@@ -84,7 +84,7 @@ Backend/
    
    # SendGrid Email Configuration
    SENDGRID_API_KEY=your_sendgrid_api_key_here
-   SENDGRID_FROM_EMAIL=noreply@badhosa.com
+   SENDGRID_FROM_EMAIL=noreply@example.com
    ```
 
 4. **Start MongoDB**
@@ -179,76 +179,6 @@ The API uses JWT tokens for authentication. Include the token in the Authorizati
 Authorization: Bearer <your_jwt_token>
 ```
 
-## Example GraphQL Queries
-
-### Register a User
-```graphql
-mutation { 
-  createUser(input: 
-  { 
-  name: "John", 
-  email: "john@example.com", 
-  password: "123" 
-  }
-  )}
-```
-
-### Login
-```graphql
-mutation {
-  login(email: "john@example.com", password: "password123") {
-    token
-    user {
-      id
-      name
-      email
-    }
-  }
-}
-```
-
-### Create a Vehicle
-```graphql
-mutation {
-  createVehicle(input: {
-    type: CAR
-    brand: "Toyota"
-    model: "Camry"
-    year: 2020
-    licensePlate: "ABC123"
-    location: {
-      city: "New York"
-      lat: 40.7128
-      lon: -74.0060
-    }
-    pricePerHour: 25.0
-  }) {
-    id
-    brand
-    model
-    pricePerHour
-  }
-}
-```
-
-### Make a Booking
-```graphql
-mutation {
-  createBooking(input: {
-    vehicleId: "vehicle_id_here"
-    startTime: "2024-01-15T10:00:00Z"
-    endTime: "2024-01-15T14:00:00Z"
-  }) {
-    id
-    totalAmount
-    status
-    vehicle {
-      brand
-      model
-    }
-  }
-}
-```
 
 ## Development
 
