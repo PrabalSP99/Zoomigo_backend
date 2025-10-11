@@ -64,9 +64,10 @@ jobs:
         path: .
         format: spdx-json
         output-file: backend-sbom.spdx.json
+        artifact-name: backend-sbom-artifact
 
     - name: Upload SBOM
       uses: actions/upload-artifact@v4
       with:
-        name: backend-sbom-${{ github.run_number }}
+        name: backend-sbom-artifact
         path: backend-sbom.spdx.json
