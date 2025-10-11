@@ -1,0 +1,75 @@
+# ===========================================
+# RentalAPP Environment Variables Template
+# ===========================================
+# Copy this content to .env files and replace values with your actual configuration
+
+# ===========================================
+# Application Environment
+# ===========================================
+NODE_ENV=development
+PORT=4004
+
+# ===========================================
+# Database Configuration
+# ===========================================
+# MongoDB connection string
+MONGODB_URI=mongodb://admin:password@localhost:27017/rentalapp?authSource=admin
+
+# MongoDB credentials (for Docker)
+MONGO_ROOT_USERNAME=admin
+MONGO_ROOT_PASSWORD=your_secure_mongodb_password
+MONGO_DATABASE=rentalapp
+
+# ===========================================
+# Authentication & Security
+# ===========================================
+# JWT Secret Key (generate a strong random string)
+JWT_SECRET=your_super_secret_jwt_key_here_make_it_long_and_random_for_production
+
+# ===========================================
+# Email Service (SendGrid)
+# ===========================================
+# SendGrid API Key for sending emails
+SENDGRID_API_KEY=your_sendgrid_api_key_here
+SENDGRID_FROM_EMAIL=your_verified_sender_email@domain.com
+
+# ===========================================
+# Google OAuth Configuration
+# ===========================================
+# Google OAuth credentials for social login
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+GOOGLE_CALLBACK_URL=http://localhost:4004/auth/google/callback
+
+# ===========================================
+# Frontend Configuration
+# ===========================================
+# API endpoints for frontend
+NEXT_PUBLIC_API_URL=http://localhost:4004
+NEXT_PUBLIC_GRAPHQL_URL=http://localhost:4004/graphql
+
+# ===========================================
+# Docker Configuration
+# ===========================================
+# These are used in docker-compose.yml
+# Update these for production deployment
+COMPOSE_PROJECT_NAME=rentalapp
+
+# ===========================================
+# Production Environment Variables
+# ===========================================
+# Uncomment and configure these for production deployment
+
+# # Production Database
+# MONGODB_URI=mongodb://your_production_db_host:27017/rentalapp_prod
+
+# # Production API URLs
+# NEXT_PUBLIC_API_URL=https://your-api-domain.com
+# NEXT_PUBLIC_GRAPHQL_URL=https://your-api-domain.com/graphql
+
+# # Production Google OAuth
+# GOOGLE_CALLBACK_URL=https://your-api-domain.com/auth/google/callback
+
+# # SSL/TLS Configuration (if needed)
+# SSL_CERT_PATH=/path/to/ssl/cert.pem
+# SSL_KEY_PATH=/path/to/ssl/private.key
