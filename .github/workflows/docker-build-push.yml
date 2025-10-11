@@ -58,16 +58,3 @@ jobs:
         platforms: linux/amd64,linux/arm64
 
 
-    - name: Generate SBOM for backend
-      uses: anchore/sbom-action@v0.15.1
-      with:
-        path: .
-        format: spdx-json
-        output-file: backend-sbom.spdx.json
-        artifact-name: backend-sbom-artifact
-
-    - name: Upload SBOM
-      uses: actions/upload-artifact@v4
-      with:
-        name: backend-sbom-artifact
-        path: backend-sbom.spdx.json
