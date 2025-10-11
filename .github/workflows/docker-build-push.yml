@@ -68,5 +68,5 @@ jobs:
     - name: Upload SBOM
       uses: actions/upload-artifact@v4
       with:
-        name: backend-sbom-${{ github.ref_name }}   # safe
+        name: backendSbom   # safe
         path: backend-sbom.spdx.json
