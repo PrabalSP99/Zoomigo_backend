@@ -21,8 +21,15 @@ const PORT = process.env.PORT || 4004;
 // Connect to MongoDB
 connectDB();
 
+// CORS Configuration
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['http://localhost:3000'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Create Apollo Server

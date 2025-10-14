@@ -15,6 +15,7 @@ services:
       PORT: ${PORT}
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
       SENDGRID_FROM_EMAIL: ${SENDGRID_FROM_EMAIL}
+      CORS_ORIGIN: ${CORS_ORIGIN}
      
      
     ports:
