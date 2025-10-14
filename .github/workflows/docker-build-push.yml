@@ -45,6 +45,14 @@ jobs:
           type=raw,value=latest,enable={{is_default_branch}}
 
 
+    - name: Validate Dockerfile exists
+      run: |
+        if [ ! -f "./Dockerfile" ]; then
+          echo "Dockerfile not found in current directory"
+          exit 1
+        fi
+        echo "✅ Dockerfile found and validated"
+
     - name: Build and push backend image
       uses: docker/build-push-action@v5
       with:
@@ -53,8 +61,8 @@ jobs:
         push: true
         tags: ${{ steps.meta-backend.outputs.tags }}
         labels: ${{ steps.meta-backend.outputs.labels }}
+        build-args: |
+          NODE_ENV=production
         cache-from: type=gha
         cache-to: type=gha,mode=max
         platforms: linux/amd64,linux/arm64
-
-
