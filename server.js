@@ -23,9 +23,20 @@ connectDB();
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['https://www.badhosa.com'],
-  methods: ['POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [
+    'https://www.badhosa.com',
+    'https://badhosa.com',
+    'http://localhost:3000', // for development
+    'http://localhost:3001'  // for development
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'X-Requested-With',
+    'Accept',
+    'Origin'
+  ],
   credentials: true,
   optionsSuccessStatus: 200
 };
@@ -37,11 +48,19 @@ app.use(express.json());
 // Add explicit CORS headers for all responses
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['https://www.badhosa.com'];
+  const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [
+    'https://www.badhosa.com',
+    'https://badhosa.com',
+    'http://localhost:3000',
+  ];
   
   if (allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
+  } else {
+    // For debugging - log rejected origins
+    console.log(`CORS: Rejected origin: ${origin}`);
   }
+  
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
