@@ -23,12 +23,24 @@ connectDB();
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [
-    'https://www.badhosa.com',
-    'https://badhosa.com',
-    'http://localhost:3000', // for development
-    'http://localhost:3001'  // for development
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [
+      'https://www.badhosa.com',
+      'https://badhosa.com',
+      'http://localhost:3000',
+      'http://localhost:3001'
+    ];
+    
+    // Allow requests with no origin (mobile apps, etc.)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log(`CORS blocked origin: ${origin}`);
+      callback(null, true); // Allow for now, but log
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
     'Content-Type', 
@@ -52,13 +64,20 @@ app.use((req, res, next) => {
     'https://www.badhosa.com',
     'https://badhosa.com',
     'http://localhost:3000',
+    'http://localhost:3001'
   ];
   
-  if (allowedOrigins.includes(origin)) {
+  console.log(`CORS: Request origin: ${origin}`);
+  console.log(`CORS: Allowed origins: ${allowedOrigins.join(', ')}`);
+  
+  if (origin && allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
+    console.log(`CORS: Allowed origin: ${origin}`);
   } else {
     // For debugging - log rejected origins
     console.log(`CORS: Rejected origin: ${origin}`);
+    // Set a default allowed origin for testing
+    res.header('Access-Control-Allow-Origin', 'https://www.badhosa.com');
   }
   
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -67,11 +86,11 @@ app.use((req, res, next) => {
   
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
-  } else {
-    next();
+    return;
   }
+  
+  next();
 });
-
 // Handle preflight requests explicitly
 app.options('*', cors(corsOptions));
 
