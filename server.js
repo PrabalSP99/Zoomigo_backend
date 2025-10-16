@@ -23,7 +23,7 @@ connectDB();
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['https://www.badhosa.com/'],
+  origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['https://www.badhosa.com'],
   credentials: true,
   optionsSuccessStatus: 200
 };
