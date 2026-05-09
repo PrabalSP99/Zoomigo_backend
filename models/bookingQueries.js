@@ -1,6 +1,6 @@
 
 // models/bookingQueries.js - PostgreSQL Booking Queries
-const pool = require('../config/database');
+const pool = require('../config/database_pg');
 
 const bookingQueries = {
   // Create booking

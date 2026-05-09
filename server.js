@@ -10,16 +10,22 @@ if (!process.env.JWT_SECRET) {
   console.log('Warning: Using default JWT_SECRET. Please set JWT_SECRET in your environment variables for production.');
 }
 
-const connectDB = require('./config/database');
+const pool = require('./config/database_pg');
 const typeDefs = require('./schemas/schema');
-const resolvers = require('./resolvers');
+const resolvers = require('./resolvers/index_pg');
 const auth = require('./middleware/auth');
 
 const app = express();
 const PORT = process.env.PORT || 4004;
 
-// Connect to MongoDB
-connectDB();
+// Test PostgreSQL connection
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('❌ PostgreSQL connection failed:', err);
+  } else {
+    console.log('✅ PostgreSQL connected successfully');
+  }
+});
 
 // CORS Configuration
 const corsOptions = {

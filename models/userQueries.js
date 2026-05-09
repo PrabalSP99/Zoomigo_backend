@@ -1,6 +1,6 @@
 
 // models/userQueries.js - PostgreSQL User Queries
-const pool = require('../config/database');
+const pool = require('../config/database_pg');
 const bcrypt = require('bcryptjs');
 
 const userQueries = {

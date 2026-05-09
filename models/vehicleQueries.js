@@ -1,6 +1,6 @@
 
 // models/vehicleQueries.js - PostgreSQL Vehicle Queries
-const pool = require('../config/database');
+const pool = require('../config/database_pg');
 
 const vehicleQueries = {
   // Get all vehicles with filters
